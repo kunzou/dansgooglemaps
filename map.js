@@ -7,19 +7,19 @@ function geocodeAddress() {
   
   var infowindow =  new google.maps.InfoWindow({});
   var marker, count;
-  for (count = 0; count < locations.length; count++) {
+  locations.forEach(location => {
     marker = new google.maps.Marker({
-      position: new google.maps.LatLng(locations[count][1], locations[count][2]),
-      icon: locations[count][3],
+      position: new google.maps.LatLng(location[1], location[2]),
+      icon: location[3],
       animation: google.maps.Animation.DROP,
       map: map,
-      title: locations[count][0]
+      title: location[0]
     });
     google.maps.event.addListener(marker, 'click', (function (marker, count) {
       return function () {
-        infowindow.setContent(locations[count][0]);
+        infowindow.setContent(location[0]);
         infowindow.open(map, marker);
       }
     })(marker, count));
-  } 
+  } );
 }
